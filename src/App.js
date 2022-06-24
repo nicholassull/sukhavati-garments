@@ -10,6 +10,7 @@ const Shop = () => {
 const App = () => {
   return (
     <Routes>
+      {/* Navigation contains all other routes so that it can always be displayed regardless of what the user is viewing. */}
       <Route path='/' element={<Navigation />}>
         {/* The index attribute indicates that this component is considered the base outlet component & will be rendered automatically */}
         <Route index element={<Home />} />

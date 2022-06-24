@@ -8,7 +8,7 @@ const Navigation = () => {
     <Fragment>
       <div className='navigation'>
         <Link className='logo-container' to='/'>
-        <NavLogo className='logo'></NavLogo>
+          <NavLogo className='logo'></NavLogo>
         </Link>
         <div className='nav-links-container'>
           <Link className='nav-link' to='/shop'>
@@ -16,6 +16,7 @@ const Navigation = () => {
           </Link>
         </div>
       </div>
+      {/* Renders the nested routes (found in App.js) depending on the current URL */}
       <Outlet />
     </Fragment>
   )
