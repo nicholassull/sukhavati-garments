@@ -1,6 +1,12 @@
 //Creates an app instance based off config
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from 'firebase/firestore'
 
 // Your web app's Firebase configuration
 
@@ -32,3 +38,16 @@ provider.setCustomParameters({
 //There is only ever 1 auth in a project that will be tracked once it is initialized. 
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+//Directly points to our DB and lets us get and set documents.
+export const db = getFirestore();
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+  //Creates a reference to a document in the db, whether or not the document exists yet.
+  //3 Args of Doc(): the databse, collection, document ID
+  const userDocRef = doc(db, 'users', userAuth.uid)
+  console.log(userDocRef);
+
+  const userSnapshot = await getDoc(userDocRef);
+  //Check whether the snapshot of the docRef actually contains a document/document exists.
+  console.log(userSnapshot.exists());
+}
