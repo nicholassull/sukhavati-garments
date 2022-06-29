@@ -50,4 +50,25 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   const userSnapshot = await getDoc(userDocRef);
   //Check whether the snapshot of the docRef actually contains a document/document exists.
   console.log(userSnapshot.exists());
+
+  if(!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      //Creates or updates a doc. First argument is docRef, second is data to enter. If done like this, vatriable names will be key and variable value will be value.
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt
+        //same as bellow
+        //displayName: "Nicholas Sullivan",
+        //email: "nicholassull@gmail.com"
+      });
+    } catch (error) {
+      console.log('error creating the user', error.message);
+    }
+  }
+
+  return userDocRef;
 }
